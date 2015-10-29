@@ -40,3 +40,13 @@ module.exports.tileJSON = function(urlOrMapID, accessToken) {
 
     return url;
 };
+
+
+module.exports.style = function(styleURL, accessToken) {
+    if (styleURL.indexOf('mapbox://styles/') === -1) throw new Error('Incorrectly formatted Mapbox style at ' + styleURL);
+
+    var ownerIDStyle = styleURL.split('mapbox://styles/')[1];
+    var url = module.exports('/styles/v1/' + ownerIDStyle, accessToken);
+
+    return url;
+};

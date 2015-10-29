@@ -41,4 +41,15 @@ describe("format_url", function() {
             expect(internals.format_url.tileJSON('user.map')).to.equal('https://a.tiles.mapbox.com/v4/user.map.json?access_token=key&secure');
         });
     });
+
+    describe('.style', function() {
+        it('returns the input when passed a URL', function() {
+            expect(internals.format_url.style('mapbox://styles/bobbysud/cifr15emd00007zlzxjew2rar')).to.equal('http://a.tiles.mapbox.com/styles/v1/bobbysud/cifr15emd00007zlzxjew2rar?access_token=key')
+        });
+
+        it('appends &secure and uses https when FORCE_HTTPS is set', function() {
+            internals.config.FORCE_HTTPS = true;
+            expect(internals.format_url.style('mapbox://styles/bobbysud/cifr15emd00007zlzxjew2rar')).to.equal('https://a.tiles.mapbox.com/styles/v1/bobbysud/cifr15emd00007zlzxjew2rar?access_token=key&secure');
+        });
+    });
 });
